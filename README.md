@@ -16,3 +16,7 @@ Future Improvements
 -----------------------------
 
 - A tail reference could be added and kept track of throughout the methods to allow for an O(1) time complexity. The original project called for an implementation without a tail reference, to demonstrate various methods.
+
+Credits
+-----------------------------
+- LinkedListInterface and LinkedListNode were written by TAs within the class. CircularDoublyLinkedList was created through the implementation of the given classes.
