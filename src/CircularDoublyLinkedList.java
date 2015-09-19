@@ -28,6 +28,9 @@ public class CircularDoublyLinkedList<T> implements LinkedListInterface<T> {
      * item in {@code data} is null.
      */
     public CircularDoublyLinkedList(T[] data) {
+        if (data == null) {
+            throw new IllegalArgumentException("Data given is null.");
+        }
         for (int i = 0; i < data.length; i++) {
             addAtIndex(i, data[i]);
         }
@@ -58,7 +61,12 @@ public class CircularDoublyLinkedList<T> implements LinkedListInterface<T> {
             newNode.setNext(head);
             head = newNode;
             size++;
-
+        } else if (index == size) {
+            head.getPrevious().setNext(newNode);
+            newNode.setPrevious(head.getPrevious());
+            head.setPrevious(newNode);
+            newNode.setNext(head);
+            size++;
         } else {
             for (int i = 0; i < index; i++) {
                 current = current.getNext();
@@ -94,7 +102,7 @@ public class CircularDoublyLinkedList<T> implements LinkedListInterface<T> {
      */
     @Override
     public T removeAtIndex(int index) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index not in list.");
         }
         LinkedListNode<T> current = head;
@@ -103,7 +111,14 @@ public class CircularDoublyLinkedList<T> implements LinkedListInterface<T> {
             head.getPrevious().setNext(head.getNext());
             head.getNext().setPrevious(head.getPrevious());
             T data = head.getData();
+            head = null;
             head = head.getNext();
+            size--;
+            return data;
+        } else if (index == size - 1) {
+            head.getPrevious().getPrevious().setNext(head);
+            head.setPrevious(head.getPrevious().getPrevious());
+            T data = head.getPrevious().getData();
             size--;
             return data;
         } else {
