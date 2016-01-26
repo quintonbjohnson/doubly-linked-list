@@ -1,7 +1,7 @@
 Doubly Linked List
 ===================
 
-By Quinton Johnson
+By QuintonJ
 
 A basic implementation of a doubly linked list, complete with methods for adding, removing, and referencing nodes.
 
